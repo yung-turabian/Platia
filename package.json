@@ -1,7 +1,15 @@
 {
-	"name": "yungturb-chat",
+	"name": "multi-chatter",
+	"type": "module",
 	"version": "0.0.1",
-	"private": true,
+	"author": "yung-turabian",
+	"description": "a sveltekit chatroom webapp",
+	"license": "ISC",
+	"private": false,
+	"repository": {
+    		"type": "git",
+    		"url": "https://github.com/yung-turabian/multi-chatter.git"
+  	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
