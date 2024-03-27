@@ -8,7 +8,7 @@
 
   onMount(async () => {
     // Get initial messages
-    const resultList = await pb.collection('messages').getList(1, 50, {
+    const resultList = await pb.collection('chatroom1').getList(1, 50, {
       sort: 'created',
       expand: 'user',
     });
@@ -16,7 +16,7 @@
 
     // Subscribe to realtime messages
     unsubscribe = await pb
-      .collection('messages')
+      .collection('chatroom1')
       .subscribe('*', async ({ action, record }) => {
         if (action === 'create') {
           // Fetch associated user
@@ -40,7 +40,7 @@
       text: newMessage,
       user: $currentUser.id,
     };
-    const createdMessage = await pb.collection('messages').create(data);
+    const createdMessage = await pb.collection('chatroom1').create(data);
     newMessage = '';
   }
 </script>
@@ -50,7 +50,7 @@
     <div class="msg">
       <img
         class="avatar"
-        src={`https://avatars.dicebear.com/api/identicon/${message.expand?.user?.username}.svg`}
+	src={`https://api.dicebear.com/8.x/bottts/svg?seed=${message.expand?.user?.username`}
         alt="avatar"
         width="40px"
       />
