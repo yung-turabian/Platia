@@ -1,4 +1,6 @@
-# multi-chatter
+# Multi-Chatter
+
+## Made with SvelteKit
 
 ## Developing
 
