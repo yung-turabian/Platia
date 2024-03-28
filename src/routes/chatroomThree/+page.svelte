@@ -3,9 +3,9 @@
     import { currentUser } from "$lib/pocketbase";
 </script>
 
-<title>Channel 1</title>
-<h1>Channel 1</h1>
+<title>Channel 3</title>
+<h1>Channel 3</h1>
 
 {#if $currentUser}
-    <Messages chatroom="chatroom1" />
+    <Messages chatroom="chatroom3" />  
 {/if}

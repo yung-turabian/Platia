@@ -37,10 +37,10 @@
         <button on:click={signOut}>Sign Out</button>
     </p>
 {:else}
-    <form on:submit|preventDefault>
-        <input placeholder="Username" type="text" bind:value={username} />
+    <form on:submit|preventDefault autocomplete="on" method="post">
+        <input placeholder="Username" type="text" bind:value={username}  autocomplete="on"/>
 
-        <input placeholder="Password" type="password" bind:value={password} />
+        <input placeholder="Password" type="password" bind:value={password} autocomplete="off"/>
         <button on:click={signUp}>Sign Up</button>
         <button on:click={login}>Login</button>
     </form>

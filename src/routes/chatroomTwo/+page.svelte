@@ -1,11 +1,12 @@
 <script lang="ts">
     import Messages from "../../components/Messages.svelte";
     import { currentUser } from "$lib/pocketbase";
+
 </script>
 
-<title>Channel 1</title>
-<h1>Channel 1</h1>
+<title>Channel 2</title>
+<h1>Channel 2</h1>
 
 {#if $currentUser}
-    <Messages chatroom="chatroom1" />
+    <Messages chatroom="chatroom2" />
 {/if}

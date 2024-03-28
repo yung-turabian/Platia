@@ -1,14 +1,16 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import { currentUser, pb } from '../lib/pocketbase';
+  import { currentUser, pb } from '$lib/pocketbase';
 
+  export let chatroom: string;
+  
   let newMessage: string;
-  let messages = [];
+  let messages: any[] = [];
   let unsubscribe: () => void;
 
   onMount(async () => {
     // Get initial messages
-    const resultList = await pb.collection('chatroom1').getList(1, 50, {
+    const resultList = await pb.collection(chatroom).getList(1, 50, {
       sort: 'created',
       expand: 'user',
     });
@@ -16,7 +18,7 @@
 
     // Subscribe to realtime messages
     unsubscribe = await pb
-      .collection('chatroom1')
+      .collection(chatroom)
       .subscribe('*', async ({ action, record }) => {
         if (action === 'create') {
           // Fetch associated user
@@ -42,12 +44,12 @@
     };
 
     if (newMessage.trim()) {
-      const createdMessage = await pb.collection('chatroom1').create(data);
+      const createdMessage = await pb.collection(chatroom).create(data);
     }
     newMessage = '';
   }
 
-  function convertToLocal(UTC) {
+  function convertToLocal(UTC : string) {
     const utcWOMillis = UTC.slice(0, -5) + "Z";
     const utcDate = new Date(utcWOMillis);
     const offsetMins = utcDate.getTimezoneOffset();
@@ -61,7 +63,7 @@
     <div class="msg">
       <img
         class="avatar"
-	      src={`https://api.dicebear.com/8.x/bottts/svg?seed=${message.expand?.user?.username}`}
+	      src={`https://api.dicebear.com/8.x/avataaars-neutral/svg?seed=${message.expand?.user?.username}`}
         alt="avatar"
         width="40px"
       />
@@ -76,7 +78,7 @@
   {/each}
 </div>
 
-<form on:submit|preventDefault={sendMessage}>
-    <input placeholder="Message" type="text" bind:value={newMessage} />
+<form on:submit|preventDefault={sendMessage} autocomplete="off" method="post">
+    <input  autocomplete="new-password" placeholder="Message" type="text" bind:value={newMessage} />
     <button type="submit">Send</button>
 </form>
