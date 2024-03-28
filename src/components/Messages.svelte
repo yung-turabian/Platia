@@ -35,9 +35,6 @@
     unsubscribe?.();
   });
 
-import { currentUser, pb } from '../lib/pocketbase';
-import { user } from 'Messages.svelte';
-
   async function sendMessage() {
     const data = {
       message: newMessage,
