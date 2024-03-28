@@ -20,7 +20,7 @@
       .subscribe('*', async ({ action, record }) => {
         if (action === 'create') {
           // Fetch associated user
-          export const user = await pb.collection('users').getOne(record.user);
+          const user = await pb.collection('users').getOne(record.user);
           record.expand = { user };
           messages = [...messages, record];
         }
