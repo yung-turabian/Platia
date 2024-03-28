@@ -3,7 +3,7 @@
   import { currentUser, pb } from '../lib/pocketbase';
 
   let newMessage: string;
-  let messages: any[] = [];
+  let messages = [];
   let unsubscribe: () => void;
 
   onMount(async () => {
@@ -36,6 +36,7 @@
   });
 
   async function sendMessage() {
+    console.log("sent");
     const data = {
       message: newMessage,
       user: $currentUser.id,
@@ -44,11 +45,6 @@
     newMessage = '';
   }
 </script>
-
-<form on:submit|preventDefault={sendMessage}>
-    <input placeholder="Message" type="text" bind:value={newMessage} />
-    <button type="submit">Send</button>
-</form>
 
 <div class="messages">
   {#each messages as message (message.id)}
@@ -69,3 +65,7 @@
   {/each}
 </div>
 
+<form on:submit|preventDefault={sendMessage}>
+    <input placeholder="Message" type="text" bind:value={newMessage} />
+    <button type="submit">Send</button>
+</form>
