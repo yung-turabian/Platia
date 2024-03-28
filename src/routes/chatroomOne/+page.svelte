@@ -8,5 +8,4 @@
 
 {#if $currentUser}
     <Messages />
-    <Input />
 {/if}
