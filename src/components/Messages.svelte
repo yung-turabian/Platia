@@ -36,13 +36,23 @@
   });
 
   async function sendMessage() {
-    console.log("sent");
     const data = {
       message: newMessage,
       user: $currentUser.id,
     };
-    const createdMessage = await pb.collection('chatroom1').create(data);
+
+    if (newMessage.trim()) {
+      const createdMessage = await pb.collection('chatroom1').create(data);
+    }
     newMessage = '';
+  }
+
+  function convertToLocal(UTC) {
+    const utcWOMillis = UTC.slice(0, -5) + "Z";
+    const utcDate = new Date(utcWOMillis);
+    const offsetMins = utcDate.getTimezoneOffset();
+    const localTime = new Date(utcDate.getTime() - offsetMins * 60 * 1000);
+    return localTime.toLocaleString();
   }
 </script>
 
@@ -58,6 +68,7 @@
       <div>
         <small>
           Sent by @{message.expand?.user?.username}
+          <br> {convertToLocal(message.created)}
         </small>
         <p class="msg-text">{message.message}</p>
       </div>
