@@ -1,6 +1,7 @@
 <script lang='ts'>
 
 import { currentUser, pb } from '../lib/pocketbase';
+import { user } from 'Messages.svelte';
 
     let newMessage: string;
 
