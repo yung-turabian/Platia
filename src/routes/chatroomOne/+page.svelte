@@ -1,13 +1,12 @@
 <script lang="ts">
-    import Login from "$lib/Login.svelte";
-    import Messages from "$lib/Messages.svelte";
+    import Messages from "../../components/Messages.svelte";
+    import Input from "../../components/Input.svelte";
     import { currentUser } from "$lib/pocketbase";
 </script>
 
 <h1>Channel 1</h1>
 
-<Login />
-
 {#if $currentUser}
     <Messages />
+    <Input />
 {/if}

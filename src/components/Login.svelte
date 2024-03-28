@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { currentUser, pb } from "./pocketbase";
+    import { currentUser, pb } from "../lib/pocketbase";
 
     let username: string;
     let password: string;
@@ -17,7 +17,7 @@
                 username,
                 password,
                 passwordConfirm: password,
-                name: "hi mom!",
+                name: username,
             };
             const createdUser = await pb.collection("users").create(data);
             await login();

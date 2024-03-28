@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import { currentUser, pb } from './pocketbase';
+  import { currentUser, pb } from '../lib/pocketbase';
 
   let newMessage: string;
-  let messages = [];
+  let messages: any[] = [];
   let unsubscribe: () => void;
 
   onMount(async () => {
@@ -34,15 +34,6 @@
   onDestroy(() => {
     unsubscribe?.();
   });
-
-  async function sendMessage() {
-    const data = {
-      text: newMessage,
-      user: $currentUser.id,
-    };
-    const createdMessage = await pb.collection('chatroom1').create(data);
-    newMessage = '';
-  }
 </script>
 
 <div class="messages">
@@ -50,7 +41,7 @@
     <div class="msg">
       <img
         class="avatar"
-	src={`https://api.dicebear.com/8.x/bottts/svg?seed=${message.expand?.user?.username`}
+	      src={`https://api.dicebear.com/8.x/bottts/svg?seed=${message.expand?.user?.username}`}
         alt="avatar"
         width="40px"
       />
@@ -58,14 +49,9 @@
         <small>
           Sent by @{message.expand?.user?.username}
         </small>
-        <p class="msg-text">{message.text}</p>
+        <p class="msg-text">{message.message}</p>
       </div>
     </div>
   {/each}
 </div>
-
-<form on:submit|preventDefault={sendMessage}>
-  <input placeholder="Message" type="text" bind:value={newMessage} />
-  <button type="submit">Send</button>
-</form>
 
