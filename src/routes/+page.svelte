@@ -9,8 +9,8 @@
 
 {#if $currentUser}
     <a href="/chatroomOne">chatroom 1</a>
-    <a href="/chatroomOne">chatroom 2</a>
-    <a href="/chatroomOne">chatroom 3</a>
-    <a href="/chatroomOne">chatroom 4</a>
-    <a href="/chatroomOne">chatroom 5</a>
+    <a href="/chatroomTwo">chatroom 2</a>
+    <a href="/chatroomThree">chatroom 3</a>
+    <a href="/chatroomFour">chatroom 4</a>
+    <a href="/chatroomFive">chatroom 5</a>
 {/if}
