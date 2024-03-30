@@ -3,7 +3,7 @@
     import { currentUser } from "$lib/pocketbase";
 </script>
 
-<title>Channel 1</title>
+<title>Platia - Channel 1</title>
 <h1>Channel 1</h1>
 
 <a href="/">BACK</a>

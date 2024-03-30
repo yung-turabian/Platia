@@ -56,23 +56,38 @@
     const localTime = new Date(utcDate.getTime() - offsetMins * 60 * 1000);
     return localTime.toLocaleString();
   }
+
+  function scrollToBottom() {
+    // Use setTimeout to allow DOM updates before scrolling
+    setTimeout(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    }, 0);
+  }
+
+  //setInterval(scrollToBottom, 1000);
+  window.addEventListener("load", scrollToBottom);
 </script>
 
-<div class="messages">
+<div class="relative" id="messages">
   {#each messages as message (message.id)}
-    <div class="msg">
+    <div class="flex flex-row ml-12">
       <img
-        class="avatar"
+        class="avatar mr-6"
 	      src={`https://api.dicebear.com/8.x/avataaars-neutral/svg?seed=${message.expand?.user?.username}`}
         alt="avatar"
         width="40px"
       />
-      <div>
-        <small>
-          Sent by @{message.expand?.user?.username}
-          <br> {convertToLocal(message.created)}
-        </small>
-        <p class="msg-text">{message.message}</p>
+      <div class="flex flex-col">
+        <div class="flex flex-row">
+          <p class="text-gray-900 dark:text-white mr-1">
+            {message.expand?.user?.username}
+          </p>
+          <p class="text-gray-400 dark:text-gray-500 text-xs mt-1">
+            {convertToLocal(message.created)}
+          </p>
+        </div>
+        <p class="font-medium text-gray-900 dark:text-white">
+          {message.message}</p>
       </div>
     </div>
   {/each}
