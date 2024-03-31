@@ -1,8 +1,8 @@
 # Platia, Open-Source Chat app
 
-## Made with SvelteKit
+Made with SvelteKit
 
-### To-Dos
+## To-Dos
 - [ ] Add a Mention (@user) feature
 - [ ] Integreate GPT3.5 or some form of 'robot'
 - [ ] Link up the vignette site I wrote on Lab PC
