@@ -3,6 +3,5 @@
 ## Made with SvelteKit
 
 ### Column Name
-- [ ] Add a Mention (@user) feature ~3d #type @name 2024-03-31  
+- [ x ] Add a Mention (@user) feature
   - [ ] Sub-task or description
-- [ ] 
