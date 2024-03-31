@@ -1,6 +1,6 @@
 # Platia, Open-Source Chat app
 
-Made with SvelteKit
+Made with SvelteKit and DB by Pocketbase.
 
 ## To-Dos
 - [ ] Add a Mention (@user) feature
