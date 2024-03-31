@@ -2,6 +2,8 @@
 
 ## Made with SvelteKit
 
-### Column Name
-- [x] Add a Mention (@user) feature
-  - [ ] Sub-task or description
+### To-Dos
+- [ ] Add a Mention (@user) feature
+- [ ] Integreate GPT3.5 or some form of 'robot'
+- [ ] Link up the vignette site I wrote on Lab PC
+  - [ ] Additionaly figure out the logic for which people will be fitted into the different rooms
