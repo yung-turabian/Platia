@@ -4,6 +4,7 @@ Made with SvelteKit and DB by Pocketbase.
 
 ## To-Dos
 - [ ] Have pre-sent chats of 3 other particpants and a robid
+- [ ] 1 room for what vignette the person feels strongest about
 - [ ] Add a manual static page
 - [ ] Integreate GPT3.5 or some form of 'robot'
 - [ ] Link up the vignette site I wrote on Lab PC
