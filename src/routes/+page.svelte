@@ -1,6 +1,7 @@
 <script lang="ts">
     import Login from "../components/Login.svelte";
     import { currentUser } from "$lib/pocketbase";
+    import {pb} from '$lib/pocketbase';
 </script>
 
 <title>Platia</title>

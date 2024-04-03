@@ -11,6 +11,8 @@
   let unsubscribe: () => void;
   let showScrollButton = false;
 
+  let inBrowser = typeof window !== 'undefined';
+
   onMount(async () => {
     // Get initial messages
     const resultList = await pb.collection(chatroom).getList(1, 100, {
@@ -44,7 +46,33 @@
   // Unsubscribe from realtime messages
   onDestroy(() => {
     unsubscribe?.();
+    if (inBrowser) {
+      window.removeEventListener('scroll', handleScroll);
+    }
   });
+
+  function handleScroll() {
+    let scrollTop = window.scrollY;
+    let windowHeight = window.innerHeight;
+    let fullHeight = document.body.offsetHeight;
+
+    // Check if the scroll is within a certain range from the bottom
+    if (scrollTop + windowHeight >= fullHeight) {
+      // User is near the bottom, hide scroll button
+      showScrollButton = false;
+    } else {
+      // User is away from the bottom, show scroll button
+      showScrollButton = true;
+    }
+  }
+
+  // Function to scroll to the bottom of the page
+  function scrollToBottom() {
+    // Use setTimeout to allow DOM updates before scrolling
+    setTimeout(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    }, 0);
+  }
 
   async function sendMessage() {
     const data = {
@@ -86,29 +114,6 @@
     }
     
     return timeString;
-  }
-
-  window.addEventListener('scroll', () => {
-    let scrollTop = window.scrollY;
-    let windowHeight = window.innerHeight;
-    let fullHeight = document.body.offsetHeight;
-
-    // Check if the scroll is within a certain range from the bottom
-    if (scrollTop + windowHeight >= fullHeight) {
-      // User is near the bottom, hide scroll button
-      showScrollButton = false;
-    } else {
-      // User is away from the bottom, show scroll button
-      showScrollButton = true;
-    }
-  });
-
-  // Function to scroll to the bottom of the page
-  function scrollToBottom() {
-    // Use setTimeout to allow DOM updates before scrolling
-    setTimeout(() => {
-      window.scrollTo(0, document.body.scrollHeight);
-    }, 0);
   }
 
 </script>

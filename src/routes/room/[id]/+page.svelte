@@ -1,7 +1,13 @@
 <script>
+    import Messages from "../../../components/Messages.svelte";
+    import { currentUser } from '$lib/pocketbase';
+
     /** @type {import('./$types').PageData} */
     export let data;
 </script>
 
-<h1>{data.post.title}</h1>
-<div>{@html data.post.content}</div>
+<h1>{data.post.name}</h1>
+
+{#if $currentUser}
+    <Messages chatroom={data.post.name} />
+{/if}
