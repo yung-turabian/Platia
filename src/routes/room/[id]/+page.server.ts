@@ -14,20 +14,44 @@ export const load: PageServerLoad = async ({ params }) => {
       id: id, 
       name: user.name + "_chat_responses",
       type: 'base',
+      system: false,
       schema: [
           {
+              system: false,
               name: 'message',
               type: 'text',
               required: true,
+              presentable: false,
+              unique: false,
               options: {
-                  min: 10,
-              },
+                  min: null,
+                  max: null,
+                  pattern: ""
+              }
           },
           {
-              name: 'user',
-              type: 'relation',
-          },
+            system: false,
+            name: 'user',
+            type: 'relation',
+            "required": true,
+            "presentable": false,
+            "unique": false,
+            "options": {
+              "collectionId": "_pb_users_auth_",
+              "cascadeDelete": false,
+              "minSelect": null,
+              "maxSelect": 1,
+              "displayFields": null
+            }
+          }
       ],
+      "indexes": [],
+      "listRule": "",
+      "viewRule": "",
+      "createRule": "user = @request.auth.id",
+      "updateRule": null,
+      "deleteRule": null,
+      "options": {}
     });
   }
   return {
