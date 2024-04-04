@@ -1,6 +1,6 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
-    import { currentUser, pb } from "../lib/pocketbase";
+    import { currentUser, pb } from "$lib/pocketbase";
     import { Alert } from "flowbite-svelte";
 
     let username: string;
@@ -43,7 +43,7 @@
 
 <div class="container mx-auto mt-4 flex flex-wrap justify-center pt-16">
     <div
-        class="w-full max-w-sm rounded-lg border border-gray-200 bg-white p-4 shadow-md dark:border-gray-700 dark:bg-gray-800 sm:p-6 lg:p-8"
+        class="w-full max-w-sm rounded-lg border border-gray-400 bg-white p-4 shadow-md dark:border-gray-700 dark:bg-gray-800 sm:p-6 lg:p-8"
     >
         {#if $currentUser}
             <p
