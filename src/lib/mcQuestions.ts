@@ -7,7 +7,6 @@ export const quizQuestions: QuizQuestinons = {
 			attributes: {
 				question: 'Hva gjorde Durek Verrett som brøt avtalen med kongehuset?',
 				hint: 'Det involverer en Instagram-video og kong Harald.',
-				correct_answer: 'Repostet en Instagram-video der kong Harald nevnes',
 				options: [
 					'Repostet en Instagram-video der kong Harald nevnes',
 					'Snakket om kongehuset i et intervju',
@@ -25,7 +24,6 @@ export const quizQuestions: QuizQuestinons = {
 			attributes: {
 				question: "Hva var årsaken til Elin Kjos' død?",
 				hint: 'Sykdommen ble oppdaget for tre år siden.',
-				correct_answer: 'Aggressiv lungekreft',
 				options: ['Hjerteinfarkt', 'Bilulykke', 'Aggressiv lungekreft', 'Ukjent årsak'],
 				createdAt: '2023-03-28T11:30:45.271Z',
 				updatedAt: '2023-03-28T11:30:45.271Z',
@@ -38,7 +36,6 @@ export const quizQuestions: QuizQuestinons = {
 			attributes: {
 				question: 'Hva skjedde med bilen som krasjet inn i William Bolsøys eiendom på Åros?',
 				hint: 'Se etter hva som skjedde med bilen etter krasjet',
-				correct_answer: 'Bilen krasjet delvis i husveggen og hang fra muren og hekken',
 				options: [
 					'Bilen krasjet i en annen bil',
 					'Bilen krasjet i et tre',
@@ -57,7 +54,6 @@ export const quizQuestions: QuizQuestinons = {
 				question:
 					'Hva sa president Vladimir Putin i sin tale til innenriksdepartementet denne uken?',
 				hint: 'Talen omhandler undertrykkelse av provokasjoner og ulovlige aksjoner.',
-				correct_answer: 'Putin krever umiddelbart å undertrykke provokasjoner og ulovlige aksjoner',
 				options: [
 					'Putin oppfordrer til dialog med Vesten',
 					'Putin annonserer økonomiske reformer',
@@ -75,7 +71,6 @@ export const quizQuestions: QuizQuestinons = {
 			attributes: {
 				question: 'Hva har Russlands president Vladimir Putin nylig besluttet å gjøre i Belarus?',
 				hint: 'Det involverer kjernefysiske våpen og har skapt bekymring i Ukraina og EU.',
-				correct_answer: 'Utplassere atomvåpen',
 				options: [
 					'Utplassere atomvåpen',
 					'Inngå en handelsavtale',
@@ -93,7 +88,6 @@ export const quizQuestions: QuizQuestinons = {
 			attributes: {
 				question: 'Hva skjedde med Mina (16) i fotgjengerfeltet i Trondheimsveien?',
 				hint: 'Hendelsen involverte en bil og et fotgjengerfelt',
-				correct_answer: 'Hun ble påkjørt og sjåføren stakk av',
 				options: [
 					'Hun ble påkjørt og sjåføren stakk av',
 					'Hun falt og skadet seg selv',

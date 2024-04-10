@@ -25,11 +25,6 @@ export interface QuizQuestinonsData {
 
 interface QuizQuestinonsAtributes {
 	question: string;
-	hint: string;
-	correct_answer: string;
 	options: string[];
 	createdAt: string;
-	updatedAt: string;
-	publishedAt: string;
-	article_id: string;
 }

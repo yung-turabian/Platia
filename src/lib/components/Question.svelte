@@ -17,13 +17,8 @@
 			class="
             p-4 flex text-left items-center row gap-4 rounded-xl border {userAnswer === index
 				? 'border-[#1b1b1d]'
-				: 'border-[#3C3C43]/29'} {userAnswer !== null && userAnswer !== undefined
-				? answer === question.attributes.correct_answer
-					? 'bg-green-50'
-					: 'bg-red-50'
-				: 'bg-white'}"
+				: 'border-[#3C3C43]/29'}"
 			on:click={() => handleAnswerSelect(index)}
-			disabled={isAnswered}
 		>
 			{#if userAnswer === index}
 				<CheckmarkIcon />
