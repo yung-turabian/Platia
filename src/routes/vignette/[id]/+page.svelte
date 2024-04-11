@@ -4,17 +4,21 @@
     export let data;
 
     import type { UserAnswers } from '../../../types/MCQuestions';
-    import { quizQuestions } from '$lib/mcQuestions';
+    //import { quizQuestions } from '$lib/mcQuestions';
     import ProgressBar from "$lib/components/ProgressBar.svelte";
     import MultipleChoice from "$lib/components/MultipleChoice.svelte";
     import NextButton from "$lib/components/NextButton.svelte";
     import BackButton from "$lib/components/BackButton.svelte";
+    import { fade } from "svelte/transition";
 
-    const quizQuestionsData = quizQuestions.data;
+    let showScrollButton = false;
+    let visible = false;
+
+    const quizQuestionsData = data.post.questions.data;
     let userAnswers: UserAnswers = new Array(quizQuestionsData.length).fill(null);
     let currentQuestionIndex = 0;
 
-    quizQuestionsData.forEach((question) => {
+    quizQuestionsData.forEach((question: { attributes: { options: any[]; }; }) => {
 		question.attributes.options.sort();
 	});
 
@@ -26,30 +30,24 @@
 	function nextQuestion() {
 	    currentQuestionIndex++;
 	}
-        function prevQuestion() {
-            if (currentQuestionIndex != 0) {
-                currentQuestionIndex--;
-            }
-        }
-
-    function handleScroll() {
-        let scrollTop = window.scrollY;
-        let windowHeight = window.innerHeight;
-        let fullHeight = document.body.offsetHeight;
-
-        // Check if the scroll is within a certain range from the bottom
-        if (scrollTop + windowHeight >= fullHeight) {
-        // User is near the bottom, hide scroll button
-        showScrollButton = false;
-        } else {
-        // User is away from the bottom, show scroll button
-        showScrollButton = true;
+    function prevQuestion() {
+        if (currentQuestionIndex != 0) {
+            currentQuestionIndex--;
         }
     }
 
-    // Function to scroll to the bottom of the page
+    function toggleVissible() {
+        if (visible == false) {
+            visible = !visible;
+            scrollToBottom();
+        } else {
+            scrollToBottom();
+            console.log(userAnswers);
+            return;
+        }
+    }
+
     function scrollToBottom() {
-        // Use setTimeout to allow DOM updates before scrolling
         setTimeout(() => {
         window.scrollTo(0, document.body.scrollHeight);
         }, 0);
@@ -67,11 +65,17 @@
         <p class="w-full rounded-lg px-5 py-2.5 pb-12 
         text-left text-sm font-medium dark:text-white text-black">
             {data.post.content}</p>
-
+            <button
+            on:click={toggleVissible}
+                class="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >Continue</button
+            >
         </div>
     </div>
     
-    <div class="container mx-auto mt-4 flex flex-wrap justify-center pt-4">
+{#if visible}
+    <div class="container mx-auto mt-4 flex flex-wrap justify-center pt-4"
+            transition:fade={{ delay: 250, duration: 300 }}>
         <div
         class="w-full max-w-sm rounded-lg border border-gray-400 bg-white p-4 shadow-md dark:border-gray-700 dark:bg-gray-800 sm:p-6 lg:p-8"
         >
@@ -97,4 +101,5 @@
         {/if}
         </div>
     </div>
+{/if}
 </body>

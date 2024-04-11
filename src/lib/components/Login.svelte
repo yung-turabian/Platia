@@ -79,7 +79,7 @@
                     <label
                         for="username"
                         class="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-300"
-                        >Username</label
+                        >Particpant ID</label
                     >
                     <input
                         type="username"
