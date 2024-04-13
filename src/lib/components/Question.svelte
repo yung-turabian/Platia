@@ -1,7 +1,6 @@
 <script lang="ts">
 	import CheckmarkIcon from './CheckmarkIcon.svelte';
 
-
 	export let question: any;
 	export let handleAnswerSelect: (answerIndex: number) => void;
 	export let userAnswer: any;

@@ -6,29 +6,82 @@
     import { fade } from "svelte/transition";
     import Alert from "flowbite-svelte/Alert.svelte";
     import type { PageData } from "./$types";
-    import { currentUser } from "$lib/pocketbase";
+    import { currentUser, pb } from "$lib/pocketbase";
 
     export let data : PageData;
 
-    const VIGNETTES: string[] = ['ss9l9lk2pk3yvms', 'ciqudfor6db763i', 'ntwlfyr56i4tvvx', '7ojcaft5uqmvqxa'];
-    let currentVignnetteIndex = 0;
+    const VIGNETTES: string[] = ['egmpdb5wxn0i5ds', 'ss9l9lk2pk3yvms', 'ciqudfor6db763i', 'ntwlfyr56i4tvvx', '7ojcaft5uqmvqxa'];
+    let currentVignetteIndex = 0;
 
     let visible = false;
     let done = false;
     let error: string;
 
     let quizQuestionsData: any = [];
-    let userAnswers = new Array(quizQuestionsData.length).fill(null);
+    let userAnswers: number[] = [];
     let currentQuestionIndex = 0;
 
+    let userAnswersData: { [key: string]: { 
+        questions: string[]; 
+        numeric: number[]; 
+        string: string[] 
+    } } = {};
+    
+    VIGNETTES.forEach((vignetteId) => {
+        userAnswersData[vignetteId] = {
+            questions: new Array(quizQuestionsData.length).fill(null),
+            numeric: new Array(quizQuestionsData.length).fill(null),
+            string: new Array(quizQuestionsData.length).fill(null)
+        };
+        quizQuestionsData.forEach((question: { attributes: { question: string } }) => {
+            userAnswersData[vignetteId].questions.push(question.attributes.question);
+        });
+    });
+
+    function saveUserAnswersToJSON() {
+        const currentVignetteId = VIGNETTES[currentVignetteIndex];
+        userAnswersData[currentVignetteId].numeric = userAnswers.slice(); // Clone the numeric array
+        
+        const questions: string[] = [];
+        const answers: string[] = [];
+
+        userAnswers.forEach((answerIndex, index) => {
+            if (answerIndex !== null && answerIndex !== undefined) {
+                const question = quizQuestionsData[index].attributes.question;
+                questions.push(question);
+                
+                const answer = quizQuestionsData[index].attributes.options[answerIndex];
+                answers.push(answer);
+            }
+        });
+
+        userAnswersData[currentVignetteId].string = answers;
+        userAnswersData[currentVignetteId].questions = questions;
+
+    }
+
+    async function storeUserAnswersToDatabase() {
+        try {
+            const serializedData = JSON.stringify(userAnswersData);
+            const data = {
+                "answers": serializedData
+            };
+
+            const record = await pb.collection('users').update($currentUser.id, data);
+        } catch (error) {
+            console.error("Error storing user answers:", error);
+        }
+    }
+
     $: quizQuestionsData = data.post.questions.data;
+    $: userAnswers = new Array(quizQuestionsData.length).fill(null);
+    
 
     quizQuestionsData.forEach((question: { attributes: { options: any[]; }; }) => {
         question.attributes.options.sort();
     });
 
     function handleAnswerSelect(answerIndex: number) {
-	    const answer = quizQuestionsData[currentQuestionIndex].attributes.options[answerIndex];
 	    userAnswers[currentQuestionIndex] = answerIndex;
 	}
 
@@ -66,10 +119,12 @@
     }
 
     function reset() {
-        currentQuestionIndex = 0;
+        saveUserAnswersToJSON();
+        storeUserAnswersToDatabase();
         visible = false;
         done = false;
-        currentVignnetteIndex++;
+        currentQuestionIndex = 0;
+        currentVignetteIndex++;
     }
 
     function scrollToBottom() {
@@ -134,8 +189,8 @@
                     {/if}
 
                     {#if done}
-                        {#if currentVignnetteIndex < VIGNETTES.length}
-                            <a href="/vignette/{VIGNETTES[currentVignnetteIndex]}">
+                        {#if currentVignetteIndex < VIGNETTES.length}
+                            <a href="/vignette/{VIGNETTES[currentVignetteIndex+1]}">
                                 <button
                                 on:click={reset}
                                 class="w-full rounded-lg bg-blue-700 px-5 py-2.5
