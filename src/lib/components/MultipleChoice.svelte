@@ -1,10 +1,9 @@
 <script lang="ts">
-	import type { QuizQuestinonsData, UserAnswers } from '../../types/MCQuestions';
 	import Question from './Question.svelte';
 
-	export let quizQuestions: QuizQuestinonsData[];
+	export let quizQuestions: any[];
 	export let handleAnswerSelect: (answerIndex: number) => void;
-	export let userAnswers: UserAnswers;
+	export let userAnswers: any;
 	export let currentQuestionIndex: number;
 </script>
 
@@ -15,7 +14,6 @@
 	<Question
 		question={quizQuestions[currentQuestionIndex]}
 		{handleAnswerSelect}
-		isAnswered={userAnswers[currentQuestionIndex] !== null}
 		userAnswer={userAnswers[currentQuestionIndex]}
 	/>
 </div>

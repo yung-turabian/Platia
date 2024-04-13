@@ -1,12 +1,10 @@
 <script lang="ts">
-	import type { QuizQuestinonsData, UserAnswer } from '../../types/MCQuestions';
 	import CheckmarkIcon from './CheckmarkIcon.svelte';
 
 
-	export let question: QuizQuestinonsData;
+	export let question: any;
 	export let handleAnswerSelect: (answerIndex: number) => void;
-	export let isAnswered: boolean;
-	export let userAnswer: UserAnswer;
+	export let userAnswer: any;
 
 	$: userAnswer, console.log(userAnswer);
 </script>
@@ -17,8 +15,8 @@
 		<button
 			class="
             p-4 flex text-left items-center row gap-4 rounded-xl border dark:text-white text-black {userAnswer === index
-				? 'border-gray-400 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800'
-				: 'border-[#3C3C43]/29'}"
+				? 'border-blue-800 bg-white shadow-md dark:border-gray-100 dark:bg-gray-800'
+				: 'border-gray-400 dark:border-gray-700'}"
 			on:click={() => handleAnswerSelect(index)}
 		>
 			{#if userAnswer === index}
