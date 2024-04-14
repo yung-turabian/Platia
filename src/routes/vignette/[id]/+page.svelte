@@ -11,7 +11,7 @@
     export let data : PageData;
 
     const VIGNETTES: string[] = ['egmpdb5wxn0i5ds', 'ss9l9lk2pk3yvms', 'ciqudfor6db763i', 'ntwlfyr56i4tvvx', '7ojcaft5uqmvqxa'];
-    let currentVignetteIndex = 0;
+    let currentVignetteIndex = VIGNETTES.indexOf(data.post.id);
 
     let visible = false;
     let done = false;
@@ -39,7 +39,7 @@
     });
 
     function saveUserAnswersToJSON() {
-        const currentVignetteId = VIGNETTES[currentVignetteIndex];
+        const currentVignetteId = data.post.id;
         userAnswersData[currentVignetteId].numeric = userAnswers.slice(); // Clone the numeric array
         
         const questions: string[] = [];
@@ -189,8 +189,8 @@
                     {/if}
 
                     {#if done}
-                        {#if currentVignetteIndex < VIGNETTES.length}
-                            <a href="/vignette/{VIGNETTES[currentVignetteIndex+1]}">
+                        {#if data.post.id == VIGNETTES[4]}
+                            <a href="/room/{$currentUser.id}">
                                 <button
                                 on:click={reset}
                                 class="w-full rounded-lg bg-blue-700 px-5 py-2.5
@@ -199,8 +199,9 @@
                                 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                 >Next</button>
                             </a>
+                        
                             {:else}
-                            <a href="/room/{$currentUser.id}">
+                            <a href="/vignette/{VIGNETTES[currentVignetteIndex+1]}">
                                 <button
                                 on:click={reset}
                                 class="w-full rounded-lg bg-blue-700 px-5 py-2.5
